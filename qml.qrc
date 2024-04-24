@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>PlaylistView.qml</file>
+        <file>AppIcon.qml</file>
+        <file>TopNavBar.qml</file>
+        <file>PlayingView.qml</file>
+        <file>assets/fonts/fontawesome.otf</file>
+        <file>DurationMusic.qml</file>
+        <file>AudioControl.qml</file>
+        <file>assets/images/audio.png</file>
+        <file>assets/images/mute.png</file>
+        <file>ControlCustoms/TButton.qml</file>
+    </qresource>
+</RCC>
