@@ -4,7 +4,7 @@ Text {
     property real size
     property string icon
 
-    font.family: mainQmlApp.fontAwesomeFontLoader.name
+    font.family: rootID.fontAwesomeFontLoader.name
     font.pixelSize: size
     text: icon
 }

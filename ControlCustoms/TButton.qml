@@ -1,8 +1,8 @@
 import QtQuick 2.15
 
 Rectangle{
-    width: 60
-    height: 60
+    width: 40
+    height: 40
     radius: 10
     color: "transparent"
     property string sourceIC: ""
@@ -10,11 +10,6 @@ Rectangle{
     signal released
     signal enter
     signal exit
-    property bool isPlay
-    property bool isAudio
-    property bool isSort
-    property bool isRepeat
-    property bool isSuff
     Image {
         anchors.fill: parent
         anchors.centerIn: parent

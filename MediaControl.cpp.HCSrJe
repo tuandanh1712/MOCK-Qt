@@ -1,0 +1,172 @@
+#include "MediaControl.h"
+#include <taglib/taglib.h>
+#include "QtWidgets/qfiledialog.h"
+#include "qmediaplaylist.h"
+#include "taglib/fileref.h"
+#include <QDir>
+#include <QDebug>
+#include <QRandomGenerator>
+MediaController::MediaController(QObject *parent)
+    : QObject(parent)
+{
+    player=new QMediaPlayer;
+    playMusicList=new QMediaPlaylist;
+    m_proxyMusic= new QSortFilterProxyModel;
+
+}
+
+
+
+MediaController::~MediaController()
+{
+    delete player;
+    delete m_proxyMusic;
+    delete  playMusicList;
+    delete m_musicListModel;
+    delete m_proxyVideo;
+    delete  playVideoList;
+    delete m_videoListModel;
+
+
+}
+
+void MediaController::initEngine()
+{
+    const QUrl url(QStringLiteral("qrc:/main.qml"));
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
+        qApp, [url](QObject *obj, const QUrl &objUrl) {
+            if (!obj && url == objUrl)
+                QCoreApplication::exit(-1);
+        }, Qt::QueuedConnection);
+    engine.load(url);
+}
+
+QQmlContext *MediaController::getRootContext()
+{
+    return engine.rootContext();
+}
+
+void MediaController::getFolderMusic()
+{
+    QFileDialog dialog;
+    dialog.setFileMode(QFileDialog::Directory);
+    QString folderPath=dialog.getExistingDirectory(nullptr,"Open Folder","/home");
+    qDebug()<<"folderPath"<<folderPath;
+    QDir folder(folderPath);
+    QStringList filter;
+    filter<<"*.mp3";
+    QStringList filePath = folder.entryList(filter, QDir::Files);
+    qDebug()<<"filePath"<<filePath;
+    QList<QMediaContent> content;
+    for (int i = 0; i < filePath.size(); i++){
+
+        const QString& fileName=filePath[i];
+        QString fullPath = folder.filePath(fileName);
+        qDebug()<<"fullPath"<<fullPath;
+        //get metadata of media
+        TagLib::FileRef f(fullPath.toLocal8Bit().data());
+        TagLib::Tag* tag = f.tag();
+        if (!tag)
+        {
+            continue;
+        }
+        QString m_source=fullPath.toStdString().c_str();
+        QString m_title=QString::fromStdString(tag->title().to8Bit(true));
+        QString m_artist=QString::fromStdString(tag->artist().to8Bit(true));
+        QString m_album=QString::fromStdString(tag->album().to8Bit(true));
+        int m_index=i;
+        ModelMedia* song = new ModelMedia(m_source,m_title,m_artist,m_album,m_index);
+        musicModel.push_back(song);
+        content.push_back(QMediaContent(QUrl::fromLocalFile(fullPath)));
+
+        qDebug()<<"conten"<<&content[i];
+    }
+    m_musicListModel=new ListMusicModel(musicModel);
+    m_proxyMusic->setSourceModel(m_musicListModel);
+    playMusicList->addMedia(content);
+
+}
+
+
+QSortFilterProxyModel *MediaController::proxyMusic() const
+{
+    return m_proxyMusic;
+}
+
+void MediaController::setProxyMusic(QSortFilterProxyModel *newProxyMusic)
+{
+    if (m_proxyMusic == newProxyMusic)
+        return;
+    m_proxyMusic = newProxyMusic;
+    emit proxyMusicChanged();
+}
+
+void MediaController::getFolderVideo()
+{
+    {
+        QFileDialog dialog;
+        dialog.setFileMode(QFileDialog::Directory);
+        QString folderPath=dialog.getExistingDirectory(nullptr,"Open Folder","/home");
+        qDebug()<<"folderPath"<<folderPath;
+        QDir folder(folderPath);
+        QStringList filter;
+        filter<<"*.mp4";
+        QStringList filePath = folder.entryList(filter, QDir::Files);
+        qDebug()<<"filePath"<<filePath;
+        QList<QMediaContent> content;
+        for (int i = 0; i < filePath.size(); i++){
+
+            const QString& fileName=filePath[i];
+            QString fullPath = folder.filePath(fileName);
+            qDebug()<<"fullPath"<<fullPath;
+            //get metadata of media
+            TagLib::FileRef f(fullPath.toLocal8Bit().data());
+            TagLib::Tag* tag = f.tag();
+            if (!tag)
+            {
+                continue;
+            }
+            QString m_source=fullPath.toStdString().c_str();
+            QString m_title=QString::fromStdString(tag->title().to8Bit(true));
+            QString m_artist=QString::fromStdString(tag->artist().to8Bit(true));
+            QString m_album=QString::fromStdString(tag->album().to8Bit(true));
+            int m_index=i;
+            ModelMedia* song = new ModelMedia(m_source,m_title,m_artist,m_album,m_index);
+            videoModel .push_back(song);
+            content.push_back(QMediaContent(QUrl::fromLocalFile(fullPath)));
+
+            qDebug()<<"conten"<<&content[i];
+        }
+        m_videoListModel=new ListMusicModel(videoModel);
+        m_proxyMusic->setSourceModel(m_videoListModel);
+        playVideoList->addMedia(content);
+    }
+}
+
+ListMusicModel *MediaController::musicListModel() const
+{
+    return m_musicListModel;
+}
+
+void MediaController::setMusicListModel(ListMusicModel *newMusicListModel)
+{
+    if (m_musicListModel == newMusicListModel)
+        return;
+    m_musicListModel = newMusicListModel;
+    emit musicListModelChanged();
+}
+
+
+QSortFilterProxyModel *MediaController::proxyVideo() const
+{
+    return m_proxyVideo;
+}
+
+void MediaController::setProxyVideo( QSortFilterProxyModel *newProxyVideo)
+{
+    if (m_proxyVideo == newProxyVideo)
+        return;
+    m_proxyVideo = newProxyVideo;
+    emit proxyMusicChanged();
+}
+

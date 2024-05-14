@@ -1,15 +1,93 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>PlaylistView.qml</file>
         <file>AppIcon.qml</file>
-        <file>TopNavBar.qml</file>
-        <file>PlayingView.qml</file>
+        <file>NavBar.qml</file>
+        <file>MenuNavBar.qml</file>
         <file>assets/fonts/fontawesome.otf</file>
-        <file>DurationMusic.qml</file>
-        <file>AudioControl.qml</file>
         <file>assets/images/audio.png</file>
         <file>assets/images/mute.png</file>
         <file>ControlCustoms/TButton.qml</file>
+        <file>ControlMusic.qml</file>
+        <file>assets/images/home1.png</file>
+        <file>assets/images/library_music.png</file>
+        <file>assets/images/video_library.png</file>
+        <file>assets/images/queue_music.png</file>
+        <file>ControlCustoms/SliderBar.qml</file>
+        <file>assets/images/bluetooth.png</file>
+        <file>assets/images/cart.png</file>
+        <file>assets/images/cloud.png</file>
+        <file>assets/images/delete_.png</file>
+        <file>assets/images/drag_handle_FILL0_wght200_GRAD200_opsz48.png</file>
+        <file>assets/images/fast_forward_FILL0_wght400_GRAD0_opsz48.png</file>
+        <file>assets/images/fast_rewind_FILL0_wght400_GRAD0_opsz48.png</file>
+        <file>assets/images/favorite.png</file>
+        <file>assets/images/filter.png</file>
+        <file>assets/images/folder.png</file>
+        <file>assets/images/foldernew.png</file>
+        <file>assets/images/grid.png</file>
+        <file>assets/images/home.png</file>
+        <file>assets/images/Logo.png</file>
+        <file>assets/images/logoApp.ico</file>
+        <file>assets/images/menu.png</file>
+        <file>assets/images/menu_open.png</file>
+        <file>assets/images/message.png</file>
+        <file>assets/images/music.png</file>
+        <file>assets/images/Music_.ico</file>
+        <file>assets/images/Music_29918.ico</file>
+        <file>assets/images/next.png</file>
+        <file>assets/images/pause.png</file>
+        <file>assets/images/pause imge.png</file>
+        <file>assets/images/play.png</file>
+        <file>assets/images/playimage.png</file>
+        <file>assets/images/pngwing.com.png</file>
+        <file>assets/images/power.png</file>
+        <file>assets/images/previous.png</file>
+        <file>assets/images/repeat.png</file>
+        <file>assets/images/repeat_FILL0_wght300_GRAD200_opsz48.png</file>
+        <file>assets/images/repeat_one.png</file>
+        <file>assets/images/repeat_onepng.png</file>
+        <file>assets/images/save.png</file>
+        <file>assets/images/search.png</file>
+        <file>assets/images/settings.png</file>
+        <file>assets/images/shuffle.png</file>
+        <file>assets/images/shuffle_.png</file>
+        <file>assets/images/shuffle_F.png</file>
+        <file>assets/images/shuffle_FILL0_wght300_GRAD200_opsz48.png</file>
+        <file>assets/images/shuffle_on.png</file>
+        <file>assets/images/shuffle_on_FILL0_wght300_GRAD200_opsz48.png</file>
+        <file>assets/images/skip_next.png</file>
+        <file>assets/images/skip_previous.png</file>
+        <file>assets/images/Song.ico</file>
+        <file>assets/images/sortAZ.png</file>
+        <file>assets/images/sort_by_alpha_FILL0_wght200_GRAD0_opsz24.png</file>
+        <file>assets/images/speed.png</file>
+        <file>assets/images/stop.png</file>
+        <file>assets/images/toggle_off_FILL0_wght400_GRAD200_opsz48.png</file>
+        <file>assets/images/toggle_on_FILL0_wght400_GRAD200_opsz48.png</file>
+        <file>assets/images/volume_off.png</file>
+        <file>assets/images/volume_up.png</file>
+        <file>assets/images/add13.png</file>
+        <file>assets/images/fast-backward13.png</file>
+        <file>assets/images/fast-forward.13png</file>
+        <file>assets/images/folder13.png</file>
+        <file>assets/images/next13.png</file>
+        <file>assets/images/openfile12.png</file>
+        <file>assets/images/pause12.png</file>
+        <file>assets/images/pause13.png</file>
+        <file>assets/images/play12.png</file>
+        <file>assets/images/play13.png</file>
+        <file>assets/images/previous13.png</file>
+        <file>assets/images/random13.png</file>
+        <file>assets/images/repeat13.png</file>
+        <file>assets/images/rewind12.png</file>
+        <file>ListMp3.qml</file>
+        <file>ListMp4.qml</file>
+        <file>MusicScreen.qml</file>
+        <file>assets/images/Loop_Icon.svg</file>
+        <file>assets/images/Loop_Icon_Dark.svg</file>
+        <file>assets/images/Loop_Playlist.svg</file>
+        <file>assets/images/Single_Loop.svg</file>
+        <file>assets/images/Shuffle_Active.svg</file>
     </qresource>
 </RCC>

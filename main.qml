@@ -2,77 +2,58 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 
 Window{
-    id: mainQmlApp
+    id: rootID
     visible: true
-    width: 350
+    width: 860
     height: 600
-
-    property string darkThemeColor: "#00142f"
-    property string foreColor: "#415673"
+    // minimumHeight: 390
+    // minimumWidth: 680
+    color: colorMediaScreen
     property alias fontAwesomeFontLoader: fontAwesomeFontLoader
-
-    property bool isMusicPlaying: false
-    property bool isMusicPaused: false
-    property bool isMusicPlayingMp4: false
-
-    property int playerDuration: 0
-
-    property real yCoordinate: 0
-
-    property string musicTitle_ : ""
-    property string artistName: "Unknown Artist"
-
-    onIsMusicPlayingChanged: {
-        if(mainQmlApp.isMusicPlaying){
-
-            ControlMusic.playMusic()
-            // playingViewID.videoID.play()
-        }
-
-        else{
-            console.log("main pasue")
-            ControlMusic.pauseMusic()
-
-            // playingViewID .videoID.pause()
-        }
-
+    property bool  isPlaying: false
+    // property bool isShowCoverArt: false
+    property bool statusVolume: false
+    property bool isVideo: false
+    property bool isShuffle: false
+    property bool colorCheck: false
+    property string colorMenuScreen: colorCheck?"#333333":"#dfe3ee"
+    property string colorMediaScreen: colorCheck?"#111111":"#f7f7f7"
+    property string colorText: colorCheck?"#f7f7f7":"#111111"
+    property string colorListView: colorCheck?"#333333":"#ffffff"
+    NavBar{
+        id:navBarID
     }
-    onIsMusicPlayingMp4Changed: {
-        if(mainQmlApp.isMusicPlayingMp4){
-            console.log("main mp4")
-            playingViewID.videoID.play()
-        }else{
-            playingViewID.videoID.pause()
-        }
-    }
-    Rectangle
-    {
-        color: darkThemeColor
-        anchors.fill: parent
-        //page 1
-        PlayingView
-        {
-            id: playingViewID
-        }
-    }
-
-    Rectangle{
-        id:diaLoglistViewID
+    MenuNavBar{
+        id:menuScreenID
         visible: false
-        color: darkThemeColor
-        height: mainQmlApp.height
-        width: mainQmlApp.width *0.75
-        anchors.right: parent.right
-
-        PlaylistView{
-            id:playlistViewID
+        width: 150
+        height: rootID.height-150
+        color: colorMenuScreen
+        anchors.left: parent.left
+    }
+    ControlMusic{
+        id:controllerScreenID
+        width: rootID.width
+        height: rootID.height-menuScreenID.height
+        anchors.bottom: parent.bottom
+    }
+    MusicScreen{
+        id:musicScreenID
+        width:menuScreenID.visible==true?  rootID.width-menuScreenID.width:rootID.width-navBarID.width
+        height: rootID.height-controllerScreenID.height
+        color: colorMediaScreen
+        Loader{
+            id:loader
+            active: false
+            anchors.fill: musicScreenID
         }
     }
-
     FontLoader
     {
         id: fontAwesomeFontLoader
         source: "qrc:/assets/fonts/fontawesome.otf"
     }
+
+
 
 }

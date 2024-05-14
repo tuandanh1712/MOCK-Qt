@@ -1,22 +1,24 @@
-#include "controlmusic.h"
-#include <QGuiApplication>
+
+#include "MediaControl.h"
+
+#include <QApplication>
 #include <QQmlApplicationEngine>
 #include<QQmlContext>
+#include <QQuickView>
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
-    // qmlRegisterType<RadialBar>("CustomControls", 1, 0, "RadialBar");
 
-    ManageSong first ;
-    controlmusic control(&first) ;
-    engine.rootContext()->setContextProperty("ControlMusic",&control);
-    engine.rootContext()->setContextProperty("SongModel",&first);
+    MediaController* mediaObj=new MediaController;
+    QQmlContext *rootContext=engine.rootContext();
+    rootContext->setContextProperty("mediaCtrl",mediaObj);
+
+    const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreated,
@@ -26,7 +28,9 @@ int main(int argc, char *argv[])
                 QCoreApplication::exit(-1);
         },
         Qt::QueuedConnection);
-    engine.load(url);
 
+    engine.load(url);
     return app.exec();
 }
+
+
