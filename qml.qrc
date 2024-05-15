@@ -89,5 +89,7 @@
         <file>assets/images/Loop_Playlist.svg</file>
         <file>assets/images/Single_Loop.svg</file>
         <file>assets/images/Shuffle_Active.svg</file>
+        <file>assets/images/archive-remove.svg</file>
+        <file>assets/images/archive-remove-outline.svg</file>
     </qresource>
 </RCC>

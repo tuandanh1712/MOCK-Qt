@@ -4,17 +4,15 @@ import QtQuick.Layouts 1.3
 
 Rectangle {
     id: navBarID
-    height:20
-    width: 30
+    height:50
+    width: 50
     color: colorMediaScreen
-    AppIcon
-    {
+    Text {
         id:iconNavID
-        icon: "\uf03a"
-        color: "black"
-        size: 30
+        font.family: rootID.fontAwesomeFontLoader.name
+        font.pixelSize: 30
+        text: "\uf03a"
     }
-
     MouseArea
     {
         anchors.fill: parent

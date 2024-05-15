@@ -122,22 +122,7 @@ Rectangle{
                 spacing: 5
                 height: content.height
                 width: content.width
-                currentIndex: -1
-                visible: true
-                ScrollBar.vertical: ScrollBar {
-                    visible: true
-                    contentItem: Item {
-                        implicitWidth: 7
-                        implicitHeight: 5
-                        Rectangle {
-                            color: "#8b9dc3"
-                            anchors.fill: parent
-                            radius: 5
-
-                        }
-                    }
-                }
-                model:mediaCtrl.proxyMusic
+                model:mediaCtrl.musicListModel
                 delegate:Rectangle{
                     id:listRect
                     width: listGlobal.width
@@ -179,7 +164,7 @@ Rectangle{
 
                     TButton{
                         id:deleteButton
-                        sourceIC:  "qrc:/assets/images/delete_.png"
+                        sourceIC: colorCheck? "qrc:/assets/images/archive-remove-outline.svg":"qrc:/assets/images/archive-remove.svg"
                         anchors.right: parent.right
                         anchors.rightMargin: 15
                         width: 30

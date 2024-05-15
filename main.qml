@@ -22,6 +22,10 @@ Window{
     property string colorListView: colorCheck?"#333333":"#ffffff"
     NavBar{
         id:navBarID
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.leftMargin: 7
+        anchors.topMargin: 4
     }
     MenuNavBar{
         id:menuScreenID

@@ -1,10 +1,5 @@
 #include "ListMusicModel.h"
-#include "qimage.h"
 
-#include <taglib/fileref.h>
-
-#include <taglib/fileref.h>
-#include <taglib/id3v2tag.h>
 ListMusicModel::ListMusicModel(QVector<ModelMedia*> &songList, QObject *parent)
     : QAbstractListModel(parent),m_listSong()
 {
@@ -77,6 +72,14 @@ void ListMusicModel::deletelMusicModel(int index)
     beginRemoveRows(QModelIndex(),index,index);
     m_listSong.removeAt(index);
     endRemoveRows();
+}
+
+void ListMusicModel::addMusicModel(ModelMedia *data)
+{
+    beginInsertRows (QModelIndex(),rowCount (QModelIndex()),rowCount (QModelIndex()));
+    m_listSong.append (data);
+    endInsertRows ();
+
 }
 
 

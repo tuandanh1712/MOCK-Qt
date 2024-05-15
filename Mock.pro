@@ -1,5 +1,4 @@
 QT += quick
-QT += quickcontrols2
 QT += quick multimedia
 LIBS += -ltag
 QT += widgets

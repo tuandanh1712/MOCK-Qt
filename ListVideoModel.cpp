@@ -1,5 +1,5 @@
 #include "ListVideoModel.h"
-#include <taglib/fileref.h>
+
 
 
 ListVideoModel::ListVideoModel(QVector<ModelMedia1*> &videoList, QObject *parent)

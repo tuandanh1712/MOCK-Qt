@@ -1,11 +1,9 @@
 #ifndef LISTMUSICMODEL_H
 #define LISTMUSICMODEL_H
 
-#include <taglib/taglib.h>
 #include <QObject>
 #include <QVector>
 #include <QDir>
-#include <taglib/id3v2tag.h>
 #include <QByteArray>
 #include <QStandardPaths>
 #include <QDebug>
@@ -50,7 +48,7 @@ public:
     QVariant data( const QModelIndex& index, int role = Qt::DisplayRole ) const override;
     QHash<int, QByteArray> roleNames() const override;
     void deletelMusicModel(int index);
-
+    void addMusicModel(ModelMedia *data);
 signals:
 
 

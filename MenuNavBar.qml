@@ -32,6 +32,9 @@ Rectangle{
             height: homeID.implicitHeight
             width: menuScreenID.width
             color: colorMenuScreen
+            border.color: colorText
+            border.width: 2
+            radius: 2
             Text{
                 id:homeID
                 font.pixelSize: 30
@@ -53,6 +56,9 @@ Rectangle{
             height: musicID.implicitHeight
             width: menuScreenID.width
             color: colorMenuScreen
+            border.color: colorText
+            border.width: 2
+            radius: 2
             Text{
                 id:musicID
                 font.pixelSize: 30
@@ -75,6 +81,9 @@ Rectangle{
             height: mp4ID.implicitHeight
             width: menuScreenID.width
             color: colorMenuScreen
+            border.color: colorText
+            border.width: 2
+            radius: 2
             Text{
                 id:mp4ID
                 font.pixelSize: 30

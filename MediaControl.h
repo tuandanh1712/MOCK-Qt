@@ -7,12 +7,8 @@
 #include "qmediaplayer.h"
 #include <QObject>
 #include <QDebug>
-#include <QQmlApplicationEngine>
 #include <QAbstractListModel>
 #include <QSortFilterProxyModel>
-#include <QQmlApplicationEngine>
-#include <QCoreApplication>
-
 
 class MediaController : public QObject
 {

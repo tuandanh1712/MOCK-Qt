@@ -1,12 +1,7 @@
-    #include "MediaControl.h"
-#include <taglib/taglib.h>
-#include "QtWidgets/qfiledialog.h"
-#include "ListMusicModel.h"
-#include "qmediaplaylist.h"
-#include "taglib/fileref.h"
-#include <QDir>
-#include <QDebug>
-#include <QRandomGenerator>
+#include "MediaControl.h"
+#include "qfiledialog.h"
+#include <QMediaPlayer>
+#include <QMediaPlaylist>
 MediaController::MediaController( QObject *parent)
     : QObject(parent)
 {
@@ -17,6 +12,7 @@ MediaController::MediaController( QObject *parent)
     m_proxyMusic= new QSortFilterProxyModel;
     m_proxyVideo=new QSortFilterProxyModel;
     player->setVolume(0);
+    m_musicListModel=new ListMusicModel;
     connect(player, &QMediaPlayer::volumeChanged, this, &MediaController::volumeChanged);
     connect(player, &QMediaPlayer::positionChanged, this, &MediaController::positionChanged);
     connect(player,&QMediaPlayer::durationChanged, this, &MediaController::durationChanged);
@@ -71,11 +67,12 @@ void MediaController::getFolderMusic()
         QString m_album=QString::fromStdString(tag->album().to8Bit(true));
         int m_index=i;
         ModelMedia* song = new ModelMedia(m_source,m_title,m_artist,m_album,m_index);
-        musicModel.push_back(song);
+        // musicModel.push_back(song);
+        m_musicListModel->addMusicModel (song);
         content.push_back(QMediaContent(QUrl::fromLocalFile(fullPath)));
     }
-    m_musicListModel=new ListMusicModel(musicModel);
-    m_proxyMusic->setSourceModel(m_musicListModel);
+    // m_musicListModel=new ListMusicModel(musicModel);?
+    // m_proxyMusic->setSourceModel(m_musicListModel);
     playMusicList->addMedia(content);
 
 }
@@ -161,8 +158,6 @@ void MediaController::getFolderVideo()
             ModelMedia1* video = new ModelMedia1(m_source,m_title,m_artist,m_album,m_index);
             videoModel .push_back(video);
             content.push_back(QMediaContent(QUrl::fromLocalFile(fullPath)));
-
-            qDebug()<<"conten"<<&content[i];
         }
         m_videoListModel=new ListVideoModel(videoModel);
         m_proxyVideo->setSourceModel(m_videoListModel);
@@ -409,7 +404,7 @@ void MediaController::setVideoSurface(QAbstractVideoSurface *newVideoSurface)
 
 void MediaController::deletelMusic(int index)
 {
-   m_musicListModel->deletelMusicModel(index);
+    m_musicListModel->deletelMusicModel(index);
     playMusicList->removeMedia(index);
     if(playMusicList->currentIndex()==index)
     {

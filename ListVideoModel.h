@@ -1,17 +1,15 @@
 #ifndef LISTVIDEOMODEL_H
 #define LISTVIDEOMODEL_H
-#include <taglib/taglib.h>
 #include <QObject>
 #include <QVector>
 #include <QDir>
-#include <taglib/id3v2tag.h>
 #include <QByteArray>
 #include <QStandardPaths>
 #include <QDebug>
 #include <QAbstractListModel>
 #include <QBuffer>
 #include <taglib/tag.h>
-
+#include <taglib/fileref.h>
 
 class ModelMedia1
 {
