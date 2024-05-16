@@ -29,7 +29,7 @@ Rectangle{
                 color: colorMediaScreen
                 Text{
                     id:textHome
-                    text: "SONGS"
+                    text: qsTr("MUSIC")+Translator.updateText
                     font.pointSize: 25
                     anchors.centerIn: parent
                     color: colorText
@@ -43,69 +43,70 @@ Rectangle{
                 width: titleArea.width-nameArea.width
                 color: colorMediaScreen
                 anchors.right: parent.right
-                Row{
-                    anchors.verticalCenter: parent.verticalCenter
-                    spacing: 10
-                    anchors.left: parent.left
-                    anchors.leftMargin: 10
+                // Row{
+                //     anchors.verticalCenter: parent.verticalCenter
+                //     spacing: 10
+                //     anchors.left: parent.left
+                //     anchors.leftMargin: 10
                     TButton{
                         id:folderButton
                         sourceIC: "qrc:/assets/images/folder13.png"
+                        anchors.verticalCenter: parent.verticalCenter
                         onPressed: {
                             mediaCtrl.getFolderMusic()
                         }
                     }
-                    TButton{
-                        id:sortTitleMusicButton
-                        width: 60
-                        height: 35
-                        color: "violet"
-                        Text{
-                            text: "Songs"
-                            anchors.centerIn: parent
-                            color: colorText
+                    // TButton{
+                    //     id:sortTitleMusicButton
+                    //     width: 60
+                    //     height: 35
+                    //     color: "violet"
+                    //     Text{
+                    //         text: "Songs"
+                    //         anchors.centerIn: parent
+                    //         color: colorText
 
-                        }
-                        onPressed: {
-                            softTitle=!softTitle
-                            mediaCtrl.sortTitleMusic(softTitle)
+                    //     }
+                    //     onPressed: {
+                    //         softTitle=!softTitle
+                    //         mediaCtrl.sortTitleMusic(softTitle)
 
-                        }
-                    }
-                    TButton{
-                        id:sortAlbumMusicButton
-                        width: 60
-                        height:35
-                        color: "violet"
-                        Text{
-                            id:sortAlbumID
-                            text:"Album"
-                            anchors.centerIn: parent
-                            color: colorText
+                    //     }
+                    // }
+                    // TButton{
+                    //     id:sortAlbumMusicButton
+                    //     width: 60
+                    //     height:35
+                    //     color: "violet"
+                    //     Text{
+                    //         id:sortAlbumID
+                    //         text:"Album"
+                    //         anchors.centerIn: parent
+                    //         color: colorText
 
-                        }
-                        onPressed: {
-                            softAlbum=!softAlbum
-                            mediaCtrl.sortAlbumMusic(softAlbum)
+                    //     }
+                    //     onPressed: {
+                    //         softAlbum=!softAlbum
+                    //         mediaCtrl.sortAlbumMusic(softAlbum)
 
-                        }
-                    }
-                    TButton{
-                        id:sortArtitsMusicButton
-                        width: 60
-                        height: 35
-                        color: "violet"
-                        Text{
-                            text: "Artist"
-                            anchors.centerIn: parent
-                            color: colorText
-                        }
-                        onPressed: {
-                            softArtist=!softArtist
-                            mediaCtrl.sortArtistMusic(softArtist)
-                        }
-                    }
-                }
+                    //     }
+                    // }
+                    // TButton{
+                    //     id:sortArtitsMusicButton
+                    //     width: 60
+                    //     height: 35
+                    //     color: "violet"
+                    //     Text{
+                    //         text: "Artist"
+                    //         anchors.centerIn: parent
+                    //         color: colorText
+                    //     }
+                    //     onPressed: {
+                    //         softArtist=!softArtist
+                    //         mediaCtrl.sortArtistMusic(softArtist)
+                    //     }
+                    // }
+                // }
 
             }
         }
@@ -164,7 +165,7 @@ Rectangle{
 
                     TButton{
                         id:deleteButton
-                        sourceIC: colorCheck? "qrc:/assets/images/archive-remove-outline.svg":"qrc:/assets/images/archive-remove.svg"
+                        sourceIC: !colorCheck? "qrc:/assets/images/trash.png":"qrc:/assets/images/garbage.png"
                         anchors.right: parent.right
                         anchors.rightMargin: 15
                         width: 30

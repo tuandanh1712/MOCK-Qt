@@ -5,6 +5,7 @@ import "ControlCustoms"
 
 Rectangle{
     id:menuScreenID
+    property bool isEnglish: false
     Column{
         spacing:50
         anchors.top: parent.top
@@ -14,7 +15,7 @@ Rectangle{
             width: 50
             height: 50
             Text{
-                text: "Dark/Light"
+                text: qsTr("Dark/Light")+Translator.updateText
                 anchors.left: parent.left
                 anchors.leftMargin: 50
                 anchors.verticalCenter: parent.verticalCenter
@@ -39,7 +40,7 @@ Rectangle{
                 id:homeID
                 font.pixelSize: 30
                 color: colorText
-                text: "Home"
+                text: qsTr("Home")+Translator.updateText
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
                 MouseArea{
@@ -63,7 +64,7 @@ Rectangle{
                 id:musicID
                 font.pixelSize: 30
                 color:colorText
-                text: "Music"
+                text: qsTr("Music")+Translator.updateText
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
                 MouseArea{
@@ -88,7 +89,7 @@ Rectangle{
                 id:mp4ID
                 font.pixelSize: 30
                 color: colorText
-                text: "Video"
+                text: qsTr("Video")
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
                 MouseArea{
@@ -101,5 +102,23 @@ Rectangle{
                 }
             }
         }
+        TButton{
+            id:langueButtonID
+            width: 30
+            height: 30
+            Text{
+                text: "Vi/En"
+                anchors.left: parent.left
+                anchors.leftMargin: 30
+                anchors.verticalCenter: parent.verticalCenter
+                color: colorText
+            }
+            sourceIC: isEnglish==false?"qrc:/assets/images/toggle_on_FILL0_wght400_GRAD200_opsz48.png":"qrc:/assets/images/toggle_off_FILL0_wght400_GRAD200_opsz48.png"
+            onPressed: {
+                isEnglish=!isEnglish
+                Translator.transVietNamese(isEnglish)
+            }
+        }
+
     }
 }

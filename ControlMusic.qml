@@ -12,12 +12,20 @@ Rectangle{
     property alias textMusic: textMusic.text
     property alias textVideo: textVideo.text
 
+    // function formatTime(milliseconds) {
+    //     var totalSeconds = Math.floor(milliseconds / 1000);
+    //     var minutes = Math.floor(totalSeconds / 60);
+    //     var seconds = totalSeconds % 60;
+    //     return minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
+    // }
     function formatTime(milliseconds) {
         var totalSeconds = Math.floor(milliseconds / 1000);
-        var minutes = Math.floor(totalSeconds / 60);
-        var seconds = totalSeconds % 60;
-        return minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
+        var hours = Math.floor(totalSeconds / 3600); // Tính số giờ
+        var minutes = Math.floor((totalSeconds % 3600) / 60); // Tính số phút, bằng cách lấy số giây còn lại sau khi tính giờ, sau đó chia cho 60
+        var seconds = totalSeconds % 60; // Lấy số giây còn lại sau khi tính phút
+        return hours.toString().padStart(2, '0') + ":" + minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
     }
+
     Column{
         Rectangle{
             id:textAreaID

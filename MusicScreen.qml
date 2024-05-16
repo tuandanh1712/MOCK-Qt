@@ -9,10 +9,19 @@ Rectangle{
     clip: true
     Image {
         id: imgHomeID
-        source: "qrc:/assets/images/logoApp.ico"
+        source: "qrc:/assets/images/Spotify-Emblema.png"
         fillMode: Image.PreserveAspectFit
         anchors.fill:parent
 
+    }
+    RotationAnimation{
+        id: rollanimationid
+        target: imgHomeID
+        from: 0
+        to:360
+        loops: Animation.Infinite
+        duration: 10000
+        running:true
     }
     VideoOutput{
         id:videoID

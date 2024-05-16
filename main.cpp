@@ -1,5 +1,6 @@
 
 #include "MediaControl.h"
+#include "Translator.h"
 
 #include <QApplication>
 #include <QQmlApplicationEngine>
@@ -17,6 +18,8 @@ int main(int argc, char *argv[])
     MediaController* mediaObj=new MediaController;
     QQmlContext *rootContext=engine.rootContext();
     rootContext->setContextProperty("mediaCtrl",mediaObj);
+    Translator translator;
+    rootContext->setContextProperty("Translator",&translator);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(

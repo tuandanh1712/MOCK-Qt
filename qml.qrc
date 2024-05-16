@@ -91,5 +91,15 @@
         <file>assets/images/Shuffle_Active.svg</file>
         <file>assets/images/archive-remove.svg</file>
         <file>assets/images/archive-remove-outline.svg</file>
+        <file>assets/images/Spotify-Emblema.png</file>
+        <file>assets/images/OIP.jpeg</file>
+        <file>assets/images/OIP (1).jpeg</file>
+        <file>assets/images/OIP (2).jpeg</file>
+        <file>assets/images/trash.png</file>
+        <file>assets/images/garbage.png</file>
+        <file>assets/language/transen.qm</file>
+        <file>assets/language/transen.ts</file>
+        <file>assets/language/transvn.qm</file>
+        <file>assets/language/transvn.ts</file>
     </qresource>
 </RCC>

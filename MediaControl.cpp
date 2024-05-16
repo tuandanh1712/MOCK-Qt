@@ -2,6 +2,7 @@
 #include "qfiledialog.h"
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
+#include <QTranslator>
 MediaController::MediaController( QObject *parent)
     : QObject(parent)
 {
@@ -11,8 +12,11 @@ MediaController::MediaController( QObject *parent)
     playVideoList= new QMediaPlaylist;
     m_proxyMusic= new QSortFilterProxyModel;
     m_proxyVideo=new QSortFilterProxyModel;
-    player->setVolume(0);
+    m_translatorVietNam= new QTranslator;
+    m_translatorEnglish= new QTranslator;
     m_musicListModel=new ListMusicModel;
+    player->setVolume(0);
+
     connect(player, &QMediaPlayer::volumeChanged, this, &MediaController::volumeChanged);
     connect(player, &QMediaPlayer::positionChanged, this, &MediaController::positionChanged);
     connect(player,&QMediaPlayer::durationChanged, this, &MediaController::durationChanged);
@@ -32,6 +36,9 @@ MediaController::~MediaController()
 
     delete  playVideoList;
     delete m_proxyVideo;
+
+    delete m_translatorVietNam;
+    delete m_translatorEnglish;
 
 
 }
@@ -101,10 +108,11 @@ QVariantList MediaController::getMusicLocal()
         QString m_album=QString::fromStdString(tag->album().to8Bit(true));
         int m_index=i;
         ModelMedia* song = new ModelMedia(m_source,m_title,m_artist,m_album,m_index);
-        musicModel.push_back(song);
+        m_musicListModel->addMusicModel (song);
+        // musicModel.push_back(song);
     }
-    m_musicListModel=new ListMusicModel(musicModel);
-    m_proxyMusic->setSourceModel(m_musicListModel);
+    // m_musicListModel=new ListMusicModel(musicModel);
+    // m_proxyMusic->setSourceModel(m_musicListModel);
     playMusicList->addMedia(content);
     return musicList;
 
@@ -156,11 +164,12 @@ void MediaController::getFolderVideo()
             QString m_album=QString::fromStdString(tag->album().to8Bit(true));
             int m_index=i;
             ModelMedia1* video = new ModelMedia1(m_source,m_title,m_artist,m_album,m_index);
-            videoModel .push_back(video);
+            // videoModel .push_back(video);
+            m_videoListModel->addVideoModel(video);
             content.push_back(QMediaContent(QUrl::fromLocalFile(fullPath)));
         }
-        m_videoListModel=new ListVideoModel(videoModel);
-        m_proxyVideo->setSourceModel(m_videoListModel);
+        // m_videoListModel=new ListVideoModel(videoModel);
+        // m_proxyVideo->setSourceModel(m_videoListModel);
         playVideoList->addMedia(content);
     }
 }
@@ -603,4 +612,51 @@ void MediaController::setListVideoPath(const QStringList &newListVideoPath)
         return;
     m_listVideoPath = newListVideoPath;
     emit listVideoPathChanged();
+}
+void MediaController::transVietNamese()
+{
+    qDebug()<<"sadas";
+    // if(!m_translatorVietNam)
+    // {
+    //     qDebug()<<"sadas1";
+        m_translatorVietNam= new QTranslator;
+    // }
+    // qDebug()<<"sadas2";
+    m_translatorVietNam->load(":/assets/language/transvn.qm");
+    // if(m_translatorEnglish){
+        qApp->removeTranslator(m_translatorEnglish);
+    // }
+    qApp->installTranslator(m_translatorVietNam);
+    engine.retranslate();
+
+}
+
+void MediaController::transEnglish()
+{
+    // if(!m_translatorEnglish)
+    // {
+        m_translatorEnglish= new QTranslator;
+    // }
+    m_translatorEnglish->load(":/assets/language/transen.qm");
+
+    // if(m_translatorVietNam){
+        qApp->removeTranslator(m_translatorVietNam);
+
+    // }
+    qApp->installTranslator(m_translatorEnglish);
+    engine.retranslate();
+
+}
+
+ListVideoModel *MediaController::videoListModel() const
+{
+    return m_videoListModel;
+}
+
+void MediaController::setVideoListModel(ListVideoModel *newVideoListModel)
+{
+    if (m_videoListModel == newVideoListModel)
+        return;
+    m_videoListModel = newVideoListModel;
+    emit videoListModelChanged();
 }

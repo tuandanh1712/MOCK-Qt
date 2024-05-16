@@ -71,6 +71,13 @@ void ListVideoModel::deletelVideoModel(int index)
 
 }
 
+void ListVideoModel::addVideoModel(ModelMedia1 *data)
+{
+    beginInsertRows (QModelIndex(),rowCount (QModelIndex()),rowCount (QModelIndex()));
+    m_listVideo.append (data);
+    endInsertRows ();
+}
+
 
 
 

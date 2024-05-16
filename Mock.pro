@@ -12,9 +12,11 @@ SOURCES += \
         ListMusicModel.cpp \
         ListVideoModel.cpp \
         MediaControl.cpp \
+        Translator.cpp \
         main.cpp
 
 RESOURCES += qml.qrc
+
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -27,9 +29,16 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES +=
-
+TRANSLATIONS += transvn.ts\
+             += transen.ts
 HEADERS += \
     ListMusicModel.h \
     ListVideoModel.h \
-    MediaControl.h
+    MediaControl.h \
+    Translator.h
+
+DISTFILES += \
+    transen.ts \
+    transvn.ts \
+    transvn.ts
+

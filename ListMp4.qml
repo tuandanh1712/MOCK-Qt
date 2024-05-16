@@ -27,7 +27,7 @@ Rectangle{
                 color: colorMediaScreen
                 Text{
                     id:sectionName
-                    text: "VIDEO"
+                    text: qsTr("VIDEO")
                     font.pointSize: 25
                     anchors.centerIn: parent
                     font.bold: true
@@ -119,7 +119,7 @@ Rectangle{
                 id:listGlobalVideo
                 height: content.height
                 width: content.width
-                model:mediaCtrl.proxyVideo
+                model:mediaCtrl.videoListModel
                 delegate:
                     Rectangle{
                     id:listRect

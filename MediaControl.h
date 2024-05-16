@@ -3,8 +3,11 @@
 
 #include "ListMusicModel.h"
 #include "ListVideoModel.h"
+#include "qcoreapplication.h"
+#include "qguiapplication.h"
 #include "qimage.h"
 #include "qmediaplayer.h"
+#include "qqmlapplicationengine.h"
 #include <QObject>
 #include <QDebug>
 #include <QAbstractListModel>
@@ -22,6 +25,7 @@ public:
     Q_PROPERTY(QSortFilterProxyModel* proxyMusic READ proxyMusic WRITE setProxyMusic NOTIFY proxyMusicChanged)
     Q_PROPERTY(QSortFilterProxyModel* proxyVideo READ proxyVideo WRITE setProxyVideo NOTIFY proxyVideoChanged FINAL)
     Q_PROPERTY(ListMusicModel* musicListModel READ musicListModel WRITE setMusicListModel NOTIFY musicListModelChanged FINAL)
+    Q_PROPERTY(ListVideoModel* videoListModel READ videoListModel WRITE setVideoListModel NOTIFY videoListModelChanged FINAL)
     Q_PROPERTY(int index READ index WRITE setIndex NOTIFY indexChanged FINAL)
     Q_PROPERTY(int indexVideo READ indexVideo WRITE setIndexVideo NOTIFY indexVideoChanged FINAL)
     Q_PROPERTY(int volume READ volume WRITE setVolume NOTIFY volumeChanged FINAL)
@@ -65,6 +69,8 @@ public:
     Q_INVOKABLE void playVideo(int index);
     Q_INVOKABLE void deletelMusic(int index);
     Q_INVOKABLE void deletelVideo(int index);
+    Q_INVOKABLE void transVietNamese();
+    Q_INVOKABLE void transEnglish();
     QStringList listSongPath() const;
     QStringList listVideoPath() const;
     ListMusicModel *musicListModel() const;
@@ -88,6 +94,9 @@ public:
     qint64 duartion() const;
     qint64 position() const;
     qint64 duration() const;
+
+    ListVideoModel *videoListModel() const;
+    void setVideoListModel(ListVideoModel *newVideoListModel);
 
 public slots:
 
@@ -116,6 +125,8 @@ signals:
 
     void listVideoPathChanged();
 
+    void videoListModelChanged();
+
 private:
     QMediaPlayer* player ;
 
@@ -142,6 +153,10 @@ private:
     QVariantList musicList;
     QVariantList videoList;
     QStringList m_listVideoPath;
+    QTranslator* m_translatorVietNam=nullptr;
+    QTranslator* m_translatorEnglish=nullptr;
+    QQmlApplicationEngine engine;
+    // QGuiApplication* m_App;
 };
 
 #endif
